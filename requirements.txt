@@ -1,0 +1,8 @@
+Flask
+numpy
+pandas
+xgboost
+scikit-learn
+requests
+reportlab
+werkzeug
