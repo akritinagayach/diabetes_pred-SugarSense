@@ -1,0 +1,247 @@
+/* General Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 0;
+    
+}
+
+/* Header Styling */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; /* Ensure the header stretches across the screen */
+    display: flex;
+    justify-content: space-between; /* Ensure proper spacing between logo and nav */
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.intro-img {
+    display: block;
+    margin: 20px auto;
+    width: 60%; /* Reduced from 80% */
+    max-width: 400px; /* Optional: Set a maximum width */
+    border-radius: 10px;
+}
+
+.logo {
+    position: fixed;
+    top: 10px;
+    left: 20px;
+}
+
+.logo img {
+    max-width: 350px;
+}
+
+
+/* Main Section Styling */
+main {
+    margin-top: 100px; /* To account for the fixed header */
+    padding: 20px;
+}
+
+
+/* Introduction Section */
+.intro h1 {
+    font-size: 45px;
+    color: #7b1fa2;
+    text-align: center;
+}
+
+.intro p {
+    font-size: 20px;
+    text-align: center;
+    color: #030303;
+}
+
+.intro-img {
+    display: block;
+    margin: 20px auto;
+    width: 80%;
+    border-radius: 10px;
+}
+
+/* Health Metrics Section */
+.metrics {
+    margin: 40px 0;
+}
+
+.metrics h2 {
+    font-size: 30px;
+    color: #9b54ce;
+    margin-bottom: 15px;
+    
+}
+
+.metrics p{
+    font-size: 20px;
+}
+
+.metrics ul {
+    list-style-type: none;
+    padding: 0;
+    font-size: 20px;
+}
+
+.metrics li {
+    font-size: 20px;
+    color: #363434;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.metrics li .metric-icon {
+    width: 100px;
+    height: 80px;
+    margin-right: 15px;
+}
+
+/* Algorithm Section */
+.algorithm {
+    margin-bottom: 40px;
+}
+
+.algorithm h2 {
+    font-size: 30px;
+    color: #333;
+    margin-bottom: 15px;
+    
+}
+
+.algorithm p{
+    font-size: 20px;
+}
+
+.algorithm ul {
+    list-style-type: none;
+    padding: 0;
+    
+}
+
+.algorithm li {
+    font-size: 20px;
+    color: #363434;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.algorithm li .metric-icon {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+}
+
+.algorithm h3 {
+    font-size: 30px;
+    color: #333;
+    margin-bottom: 15px;
+    
+}
+.algorithm-visual {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.algorithm-visual img {
+    width: 80%;
+    max-width: 800px;
+    border-radius: 10px;
+}
+
+
+
+/* Resources Section */
+.resources {
+    margin-bottom: 40px;
+}
+
+.resources h2 {
+    font-size: 30px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.resources p{
+    font-size: 20px;
+}
+
+.resources ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.resources li {
+    font-size: 20px;
+    color: #363434;
+    margin: 10px 0;
+}
+
+.resources a {
+    color: #5f27cd;
+    text-decoration: none;
+}
+
+.resources a:hover {
+    text-decoration: underline;
+}
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #333;
+    color: white;
+}
+
+nav {
+    position: absolute;
+    top: 20px;
+    right: 80px;
+    z-index: 10;
+}
+
+nav a {
+    color: #111010;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+nav a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+}
+
+.home-button {
+    background-color: transparent;
+    color: #7b1fa2;
+    padding: 8px 18px;
+    border: 2px solid #7b1fa2;
+    border-radius: 20px;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.home-button:hover {
+    background-color: #7b1fa2;
+    color: white;
+    transform: scale(1.05);
+}
+
+.home-button:active {
+    transform: scale(0.95);
+}

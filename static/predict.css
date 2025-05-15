@@ -1,0 +1,246 @@
+/* General reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background: url('background.png') no-repeat center center / cover; /* Keep background image */
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 120%;
+    width: 100%;
+    position: relative;
+}
+
+
+
+.logo {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+}
+
+.logo img {
+    max-width: 350px;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    background: rgba(204, 148, 239, 0.4); /* Semi-transparent overlay */
+    z-index: -1;
+}
+
+/* Container styling */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    opacity: 0; /* Start with the form hidden */
+    animation: fadeInSlideUp 1.2s ease-out forwards; /* Animation for fade-in and slide-up */
+}
+
+/* Animation for fade-in and slide-up */
+@keyframes fadeInSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px); /* Start from below */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* End in normal position */
+    }
+}
+
+.form-container {
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 90%; /* Form width */
+    max-width: 900px;
+   
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px); /* Apply blur effect to the form background */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px; /* Space between the entire form elements */
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 30px; /* Increased gap between columns */
+}
+
+.form-item, .form-item-last {
+    flex: 1 1 45%; /* Each item takes up 45% of the row */
+    padding:25px;
+}
+
+.form-item-last {
+    flex: 1 1 100%; /* Last question spans full row */
+    text-align: left;
+}
+
+/* Add additional space between the two textboxes of the same row */
+.form-item:first-child input {
+    margin-right: 20px; /* Space between the two input fields in a row */
+}
+
+/* For form labels */
+form label {
+    font-size: 18px; /* Increased font size */
+    margin-bottom: 12px; /* Increased space between label and input */
+    display: block;
+}
+
+form small {
+    display: block;
+    font-size: 14px;
+    color: #555;
+    margin-top: 5px;
+}
+
+/* Increased padding and font size for larger input fields */
+form input {
+    padding: 20px; /* Increased padding for larger input boxes */
+    font-size: 18px; /* Larger font size */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px; /* Increased space between inputs */
+    width: 100%;
+}
+
+/* Button styling */
+form button {
+    padding: 18px;
+    background-color: #9e71c1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px; /* Larger button text */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+    margin-top: 20px;
+    width: 100%;
+}
+
+form button:hover {
+    background-color: #7b1fa2;
+    transform: scale(1.05);
+}
+
+form button:active {
+    transform: scale(0.95);
+}
+
+@media screen and (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-item, .form-item-last {
+        flex: 1 1 100%; /* Each item takes up 100% on smaller screens */
+    }
+}
+
+.prediction-result {
+    display: none;
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(135deg, #4CAF50, #2196F3);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin-top: 20px;
+    animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+nav {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+nav a {
+    color: #111010;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+nav a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+}
+
+.home-button {
+    background-color: transparent;
+    color: #7b1fa2;
+    padding: 8px 18px;
+    border: 2px solid #7b1fa2;
+    border-radius: 20px;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.home-button:hover {
+    background-color: #7b1fa2;
+    color: white;
+    transform: scale(1.05);
+}
+
+.home-button:active {
+    transform: scale(0.95);
+}
+
+.prediction-result {
+    display: block; /* Ensure it’s not hidden */
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f8ff; /* Light blue background */
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+}
+

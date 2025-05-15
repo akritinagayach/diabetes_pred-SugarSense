@@ -1,0 +1,161 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('background.png') center/cover no-repeat;
+    color: #333;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+}
+
+.logo img {
+    width: 350px;
+}
+
+nav a {
+    margin: 0 10px;
+    color: #fff;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Main Section */
+main {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+h1, h2, h3 {
+    font-size: 32px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+}
+
+h2 {
+    margin-top: 20px;
+}
+
+h3 {
+    margin-top: 20px;
+}
+
+.account-details, .predictions-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-size: 18px;
+    border-bottom: 1px solid #ddd;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.prediction-item {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(240, 240, 240, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    font-size: 18px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.prediction-item p {
+    font-size: 16px;
+    margin: 5px 0;
+    text-align: left;
+}
+
+.edit-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #5f27cd;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.logout-button {
+    background-color: #ff4b5c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.edit-btn:hover {
+    background-color: #341f97;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+}
+
+.download-report-section {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.download-heading {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px; /* Less space between heading and button */
+}
+
+
+.download-btn {
+    display: inline-block;
+    padding: 16px 32px;
+    background-color: #7331a5;
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-bottom: 20px;
+}
+
+.download-btn:hover {
+    background-color: #57339b;
+    transform: scale(1.05);
+}

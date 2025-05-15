@@ -1,0 +1,336 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: url('background.png') no-repeat center center / cover; /* Replace with your background image */
+    color: #333;
+}
+
+header {
+    text-align: center;
+    margin-top: 50px; /* Push header below the logo */
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeInDown 1s ease-out; /* Header animation */
+}
+
+.logo {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    animation: fadeInLeft 1s ease-out; /* Logo animation */
+}
+
+.logo img {
+    max-width: 350px; /* Adjust size for a compact logo */
+}
+
+.container {
+    padding: 80px 20px 20px; /* Adjusted top padding for alignment */
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 1.5s ease-out; /* Container animation */
+}
+
+h1 {
+    color: #7b1fa2;
+    text-align: center;
+    font-size: 40px;
+    animation: zoomIn 1s ease-out; /* Animation for titles */
+}
+
+h2{
+    color: #82459c;
+    text-align: center;
+    font-size: 30px;
+    animation: zoomIn 1s ease-out;
+}
+.exercise-info {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #444;
+    text-align: justify;
+    padding: 20px;
+    margin-bottom: 40px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.yoga-poses {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    animation: fadeIn 1.5s ease-out; /* Animation for the images */
+}
+
+.yoga-poses img {
+    width: 80%; /* Adjust width to fit the layout */
+    border: 3px solid #7b1fa2; /* Adds a purple outline to each image */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Adds subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeInScale 1s ease-out; /* Adds scaling animation */
+}
+
+.yoga-poses img:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+nav {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+nav a {
+    color: #111010;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+nav a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+}
+
+.home-button {
+    background-color: transparent;
+    color: #7b1fa2;
+    padding: 8px 18px;
+    border: 2px solid #7b1fa2;
+    border-radius: 20px;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.home-button:hover {
+    background-color: #7b1fa2;
+    color: white;
+    transform: scale(1.05);
+}
+
+.home-button:active {
+    transform: scale(0.95);
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+.container {
+    width: 90%;
+    margin: 50px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    margin: 10px 0 5px;
+    font-weight: bold;
+    font-size: large;
+}
+
+input, select {
+    width: 80%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+
+}
+
+button {
+    width: 85%;
+    padding: 10px;
+    background-color: #7e32bc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: large;
+
+}
+
+button:hover {
+    background-color: #521661;
+}
+
+.exercise-plan {
+    margin-top: 20px;
+    text-align: left;
+    background: #e9f5e9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    font-size: large;
+}
+
+
+/* Style the form */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: large;
+}
+
+.container input, .container select, .container button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the button */
+.container button {
+    background: #8f3cc6;
+    color: white;
+    cursor: pointer;
+    font-size: large;
+    border: none;
+    transition: 0.3s;
+}
+
+h3{
+    font-size: larger;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.container button:hover {
+    background: #501369;
+}
+
+/* Style the exercise plan table */
+#exercise-plan-container {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background: #f8f9fa;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#exercise-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#exercise-table th, #exercise-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+#exercise-table th {
+    background: #9231bc;
+    color: white;
+    font-size: large;
+
+}
+
+/* Make it responsive */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+}

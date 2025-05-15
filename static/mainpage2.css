@@ -1,0 +1,343 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Blurred Background Image */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('background.png'); /* Replace with your background image */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    filter: blur(10px);
+    z-index: -1;
+}
+
+/* Logo Styling */
+.logo {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+}
+
+.logo img {
+    max-width: 350px;
+}
+
+/* Dropdown Menu Styling */
+.dropdown-menu-container {
+    position: relative;
+}
+
+.hamburger-menu {
+    font-size: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.hamburger-menu:hover {
+    background-color: #e0e0e0;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 50px;
+    background-color: #ffffff;
+    min-width: 250px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 1000;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 14px 24px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #333333;
+    transition: background-color 0.3s ease;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.dropdown-content a:last-child {
+    border-bottom: none;
+}
+
+.dropdown-content a:hover {
+    background-color: #f5f5f5;
+}
+
+/* Adjust Dropdown Menu Container */
+.dropdown-menu-container {
+    position: fixed; /* Change to fixed for alignment with the viewport */
+    top: 10px; /* Distance from the top */
+    right: 20px; /* Distance from the right */
+    z-index: 1000; /* Ensure it stays on top */
+}
+
+/* Adjust Dropdown Content */
+.dropdown-content {
+    position: absolute;
+    top: 50px; /* Dropdown menu appears below the button */
+    right: 0; /* Align the dropdown menu with the button on the right */
+}
+
+/* Show dropdown menu when active */
+.show {
+    display: block;
+}
+
+main {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 40px;
+}
+
+/* Button Section Styling */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 70px;
+    flex-wrap: wrap;
+}
+
+.button-item {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.icon-circle {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.buttons button {
+    margin: 15px 0;
+    padding: 15px 30px;
+    font-size: 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #a054df;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.buttons button:hover {
+    background-color: #651db7;
+}
+
+/* Find a Doctor Button Styling */
+
+.find-doctor-container {
+    text-align: center;
+    margin: 50px 0;
+}
+
+.find-button {
+    padding: 15px 30px;
+    font-size: 18px;
+    background-color: #a054df;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.find-button:hover {
+    background-color: #8e3dcc;
+    transform: scale(1.05);
+}
+
+.search-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#location-input {
+    padding: 10px;
+    font-size: 16px;
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.search-button {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #a054df;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.search-button:hover {
+    background-color: #8e3dcc;
+    transform: scale(1.05);
+}
+
+#map-container {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#map-container h2 {
+    font-size: 24px;
+    color: #333;
+}
+
+#map {
+    height: 400px;
+    width: 80%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+/* Keyframe for sliding animation */
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(100%); /* Start off-screen */
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0); /* End at its original position */
+    }
+}
+
+/* Chatbot Icon Size Increase */
+#UyqzCx7AItLmnAuuSkhpV {
+    width: 100px !important; /* Adjust the size as needed */
+    height: 100px !important;
+}
+
+#map-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    transition: all 0.3s ease-in-out;
+}
+
+#map-container.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    background: white;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+.close-map-button {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: red;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+#map {
+    height: 400px;
+    width: 100%;
+}
+.fullscreen {
+    height: 100vh !important;
+    width: 100vw !important;
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+}
+.highlight {
+    filter: drop-shadow(0px 0px 10px rgba(255, 0, 0, 0.8));
+}
+
+.doctor-list-container {
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: none;
+}
+
+.doctor-list-container h2 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.doctor-list {
+    list-style: none;
+    padding: 0;
+}
+
+.doctor-list li {
+    background: white;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.doctor-list li:hover {
+    transform: translateY(-3px);
+}
+
+.doctor-list h3 {
+    margin: 0;
+    color: #2c3e50;
+}
+
+.doctor-list p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
+}

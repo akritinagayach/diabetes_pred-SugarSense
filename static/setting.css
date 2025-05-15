@@ -1,0 +1,312 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('background.png') no-repeat center center / cover;
+    color: #333;
+    background-size: cover;
+    min-height: 100vh;
+    line-height: 1.8;
+    animation: fadeIn 2s ease-out;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px;
+    color: #fff;
+}
+
+.logo img {
+    height: 300px;
+}
+
+nav .account-button {
+    background-color: transparent;
+    color: #010101;
+    padding: 8px 18px;
+    border: 2px solid #000000;
+    border-radius: 20px;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+nav .account-button:hover {
+    background-color: #7b1fa2;
+    color: white;
+    transform: scale(1.05);
+    
+}
+
+nav .account-button:active {
+    transform: scale(0.95);
+    color: white;
+}
+
+.settings-container {
+    max-width: 800px;
+    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    flex: 1;
+}
+
+h1, h2, h3 {
+    font-size: 32px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+    text-align: center;
+}
+
+h2 {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 30px;
+}
+
+h3 {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.form-item {
+    margin-bottom: 15px;
+}
+
+.form-item label {
+    display: block;
+    margin-bottom: 5px;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.form-item input, .form-item select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.edit-button{
+    background: #7b1fa2;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 15px;
+    cursor: pointer;
+    width: 20%;
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button.submit-button, button.download-button, button.delete-button {
+    background-color: #7b1fa2;
+    color: #fff;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button.submit-button:hover, button.download-button:hover {
+    background-color: #6a1b9a;
+    transform: scale(1.05);
+    color: white;
+}
+
+button.delete-button {
+    background-color: #ff4b5c;
+}
+
+button.delete-button:hover {
+    background-color: #c82333;
+    color: white;
+}
+
+.support-links a {
+    display: inline-block;
+    margin: 10px 5px;
+    padding: 8px 12px;
+    background-color: #7b1fa2;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.support-links a:hover {
+    background-color: #6a1b9a;
+    transform: scale(1.05);
+}
+
+#success-message {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: rgba(18, 16, 16, 0.1);
+    color: #000000;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    font-size: 25px;
+    margin-top: auto;
+}
+
+.label {
+    font-weight: bold;
+    text-align: center;
+}
+
+nav {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+nav a {
+    color: #111010;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+nav a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+}
+
+.account-button {
+    background-color: transparent;
+    color: #7b1fa2;
+    padding: 8px 18px;
+    border: 2px solid #7b1fa2;
+    border-radius: 20px;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.account-button:hover {
+    background-color: #7b1fa2;
+    color: white;
+    transform: scale(1.05);
+}
+
+.account-button:active {
+    transform: scale(0.95);
+}
+
+/* Default Light Theme */
+body[data-theme="light"] {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+body[data-theme="light"] .settings-container {
+    background: #f0f0f0;
+    color: #000;
+}
+
+body[data-theme="light"] input, 
+body[data-theme="light"] select, 
+body[data-theme="light"] button {
+    background: #fff;
+    color: #000;
+    border: 1px solid #ccc;
+}
+
+/* Dark Theme */
+body[data-theme="dark"] {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+body[data-theme="dark"] .settings-container {
+    background: #333;
+    color: #fff;
+}
+
+body[data-theme="dark"] input, 
+body[data-theme="dark"] select, 
+body[data-theme="dark"] button {
+    background: #444;
+    color: #fff;
+    border: 1px solid #666;
+}
+
+[data-theme="dark"] h1,h2,h3 {
+    color: #444; /* Light gray */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 50px;
+}
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+}
+h1 {
+    color: #333;
+}
+p {
+    font-size: 20px;
+    color: #282727;
+}
+.download-btn {
+    display: inline-block;
+    background: #7b1fa2;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+.download-btn:hover {
+    background: #7b1fa2;
+    transform: scale(1.05);
+}
+
+.edit-button:hover {
+    background: #7b1fa2;
+    transform: scale(1.05);
+    color: white;
+}
+

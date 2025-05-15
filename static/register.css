@@ -1,0 +1,226 @@
+/* General reset */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  height: 100%;
+  width: 100%;
+  background: url('background.png') no-repeat center center / cover; /* Replace with your background image */
+  background-size: cover; /* Ensures the image covers the full viewport */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.logo {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+}
+
+.logo img {
+  max-width: 350px;
+  margin-bottom: 0;
+}
+
+/* Blurred overlay for the background */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  background: rgba(204, 148, 239, 0.4); /* Semi-transparent overlay for the blur effect */
+  z-index: -1;
+}
+
+.login {
+  position: relative;
+  max-width: 800px; /* Larger container */
+  width: 500px; /* Ensures responsiveness */
+  padding: 60px;
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent background for glassmorphism */
+  
+  -webkit-backdrop-filter: blur(15px); /* Safari support */
+  backdrop-filter: blur(15px); /* Glassmorphism blur effect */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Light border for glassmorphism */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5); /* Subtle highlights */
+  border-right: 1px solid rgba(255, 255, 255, 0.5); /* Subtle highlights */
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  border-radius: 20px; /* Smooth corners */
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+
+  /* Animation on hover */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.login:hover {
+  transform: translateY(-10px); /* Subtle lift effect */
+  box-shadow: 0 35px 70px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+  background: rgba(255, 255, 255, 0.3); /* Slightly brighter on hover */
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15); /* Glow effect */
+  }
+}
+
+/* Apply animations */
+.login {
+  animation: fadeIn 0.8s ease-out, pulseGlow 2.5s infinite ease-in-out;
+}
+
+
+
+.hader {
+  text-align: center;
+  font-size: 50px; /* Larger text */
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.hader p {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 400;
+  color: #706b6b;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Better spacing */
+  margin-top: 20px;
+}
+
+form input {
+  height: 50px;
+  outline: none;
+  border: 1px solid #cccccc;
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+/* Password container styles */
+.password-container {
+  position: relative;
+}
+
+.password-container input {
+  width: calc(100% - 40px); /* Space for the indicator */
+}
+
+.password-container span {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 20px;
+  display: none; /* Hidden by default */
+}
+
+.password-container span.valid {
+  color: green;
+  display: inline; /* Show when valid */
+}
+
+.password-container span.invalid {
+  color: red;
+  display: inline; /* Show when invalid */
+}
+
+form button {
+  height: 50px;
+  background-color: rgba(175, 85, 231, 0.8); /* Button color */
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+form button:hover {
+  background-color: #0a0a8f; /* Hover effect */
+}
+
+form span {
+  text-align: center;
+  font-size: 18px;
+  padding-top: 10px;
+  color: #706b6b;
+}
+
+form span a {
+  text-decoration: none;
+  color: rgba(36, 36, 207, 0.8);
+  font-weight: 500;
+}
+
+form span a:hover {
+  text-decoration: underline;
+}
+
+/* Desktop-specific background */
+@media (min-width: 1024px) {
+  body {
+    background: url('background.png') no-repeat center center fixed;
+    background-size: cover;
+  }
+}
+
+.login {
+  max-width: 600px; /* Wider container for desktops */
+  padding: 50px; /* More padding for a spacious look */
+}
+
+
+.flash-messages {
+  position: absolute;
+  top: 20px; /* Adjust as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 500px;
+  text-align: center;
+  z-index: 1000;
+}
+
+.alert {
+  padding: 12px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.alert-danger {
+  background-color: #e74c3c; /* Red for errors */
+}
+
+

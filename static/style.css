@@ -1,0 +1,125 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Times New Roman', Times, serif;
+    display: flex;
+    height: 100vh;
+    background: url('background.png') left top / 50% 100% no-repeat;
+    overflow: hidden;
+    animation: fadeInBackground 1.5s ease-out; /* Background fade-in */
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    animation: slideInLeft 1s ease-out; /* Slide-in animation for content */
+}
+
+.logo {
+    max-width: 700px;
+    margin-bottom: 30px;
+    animation: zoomIn 1s ease-out; /* Zoom-in effect for the logo */
+}
+
+.get-started-button {
+    padding: 30px 50px;
+    font-size: 35px;
+    background-color: #9e71c1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+
+    /* Hover animation */
+    animation: bounce 2s infinite ease-in-out;
+}
+
+.get-started-button:hover {
+    background-color: #7b1fa2;
+    transform: scale(1.1); /* Slight enlargement on hover */
+}
+
+.image-section {
+    flex: 1;
+    animation: slideInRight 1s ease-out; /* Slide-in animation for the image section */
+}
+
+.side-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: fadeInImage 1.5s ease-out; /* Smooth fade-in for the side image */
+}
+
+/* Keyframe animations */
+@keyframes fadeInBackground {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInImage {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}

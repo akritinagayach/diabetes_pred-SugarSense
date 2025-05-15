@@ -1,0 +1,203 @@
+/* General Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('background.png'); /* Your background image */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 20px;
+    animation: fadeIn 2s ease-out; /* Apply fade-in animation */
+}
+
+/* Background animation for body */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.logo {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+}
+
+.logo img {
+    max-width: 350px;
+}
+
+/* Feedback Form Styling */
+.feedback-form {
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    border: 1px solid #cbd5e1;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px; /* Increased container size */
+    margin: 0 auto;
+    text-align: center;
+    animation: slideIn 1s ease-out; /* Animation for form slide-in */
+}
+
+/* Slide-in animation for feedback form */
+@keyframes slideIn {
+    0% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Title Styling */
+.feedback-title {
+    font-size: 28px;
+    background: linear-gradient(to right, #4a5568, #2d3748);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    font-weight: bold;
+    margin-bottom: 15px;
+    animation: textGlow 2s ease-in-out infinite alternate; /* Animation for glowing effect */
+}
+
+/* Glowing text effect for title */
+@keyframes textGlow {
+    0% {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff;
+    }
+    100% {
+        text-shadow: 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+    }
+}
+
+/* Textarea Styling */
+.feedback-textarea {
+    width: 100%;
+    height: 120px; /* Increased height for textarea */
+    padding: 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    resize: none;
+    background: rgba(245, 245, 245, 0.9);
+    outline: none;
+    transition: 0.3s;
+    animation: fadeInTextarea 1.5s ease-out; /* Fade-in animation for textarea */
+}
+
+@keyframes fadeInTextarea {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.feedback-textarea:focus {
+    border-color: #4a5568;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Feedback Buttons Styling */
+.feedback-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+/* Button Styling */
+.feedback-button, .feedback-send-button {
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    background: rgba(245, 245, 245, 0.9);
+    cursor: pointer;
+    transition: 0.3s;
+    animation: bounceIn 1s ease-out; /* Button bounce-in animation */
+}
+
+.feedback-button svg, .feedback-send-button svg {
+    fill: #4a5568;
+}
+
+.feedback-button:hover, .feedback-send-button:hover {
+    background: #e2e8f0;
+}
+
+/* Send Button Styling */
+.feedback-send-button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Button Bounce-in Animation */
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.6);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.feedback-send-button span {
+    font-weight: 500;
+    color: #4a5568;
+}
+
+nav {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+nav a {
+    color: #111010;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+nav a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+}
+
+.home-button {
+    background-color: transparent;
+    color: #7b1fa2;
+    padding: 8px 18px;
+    border: 2px solid #7b1fa2;
+    border-radius: 20px;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.home-button:hover {
+    background-color: #7b1fa2;
+    color: white;
+    transform: scale(1.05);
+}
+
+.home-button:active {
+    transform: scale(0.95);
+}

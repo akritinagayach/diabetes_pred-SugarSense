@@ -1,0 +1,119 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('background.png'); /* Replace 'background.jpg' with your image file path */
+    background-size: cover;
+    background-attachment: fixed;
+    color: #fff;
+}
+
+header {
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgb(207, 205, 205);
+    z-index: 1000;
+}
+
+.logo {
+    position: fixed;
+    top: 10px;
+    left: 20px;
+    margin-left: 20px;
+}
+
+.logo img {
+    max-width: 250px;
+}
+
+main {
+    padding: 120px 20px 20px 20px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 20px;
+    color:black
+}
+
+.faq {
+    margin-top: 20px;
+}
+
+.faq-item {
+    margin: 10px 0;
+    padding: 15px;
+    border: 1px solid rgba(7, 7, 7, 0.7);
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.faq-item h2 {
+    margin: 0;
+}
+
+.faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.faq-item.active .faq-content {
+    padding-top: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+}
+
+nav {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+nav a {
+    color: #111010;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+nav a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+}
+
+.home-button {
+    background-color: transparent;
+    color: #7b1fa2;
+    padding: 8px 18px;
+    border: 2px solid #7b1fa2;
+    border-radius: 20px;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.home-button:hover {
+    background-color: #7b1fa2;
+    color: white;
+    transform: scale(1.05);
+}
+
+.home-button:active {
+    transform: scale(0.95);
+}
