@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Account</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='account.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo2.png') }}" alt="SugarSense Logo">
+        </div>
+        <nav>
+            <a href="{{ url_for('mainpage2') }}">Home</a> <!-- Redirect to the main page -->
+            <a href="{{ url_for('setting') }}">Settings</a> <!-- Redirect to the settings page -->
+            <a href="#" onclick="confirmLogout()">Logout</a><!--redirecting to logout-->
+
+        </nav>
+    </header>
+
+    <main>
+        <h1>Welcome, {{ user[0] }}</h1>
+        <div class="account-details">
+            <div class="detail-item">
+                <span class="label">Full Name:</span>
+                <span class="value">{{ user[0] }}</span>
+            </div>
+            <div class="detail-item">
+                <span class="label">Email:</span>
+                <span class="value">{{ user[1] }}</span>
+            </div>
+        </div>
+
+        <div class="download-report-section" style="margin-top: 30px;">
+            <h2 class="download-heading">Download Your Health Report</h2>
+            <p></p>
+            <a href="/download_report" class="download-btn">Download Report</a>
+        </div>
+
+        {% if predictions %}
+        <h2>Your Predictions</h2>
+    
+        <div class="predictions-container">
+          {% for prediction in predictions|reverse %} 
+          <div class="prediction-item">
+            <p><strong>General Health:</strong> {{ prediction[2] }}</p>
+            <p><strong>Blood Pressure:</strong> {{ prediction[3] }}</p>
+            <p><strong>BMI:</strong> {{ prediction[4] }}</p>
+            <p><strong>Walking Difficulty:</strong> {{ prediction[5] }}</p>
+            <p><strong>High Cholesterol:</strong> {{ prediction[6] }}</p>
+            <p><strong>Age:</strong> {{ prediction[7] }}</p>
+            <p><strong>Heart Disease:</strong> {{ prediction[8] }}</p>
+            <p><strong>Physical Health:</strong> {{ prediction[9] }}</p>
+            <p><strong>Stroke:</strong> {{ prediction[10] }}</p>
+            <p><strong>Mental Health:</strong> {{ prediction[11] }}</p>
+            <p><strong>Cholesterol Check:</strong> {{ prediction[12] }}</p>
+            <p><strong>Smoker:</strong> {{ prediction[13] }}</p>
+            <p><strong>Prediction:</strong> {{ prediction[14] }}</p>
+            <p><strong>Date:</strong> {{ prediction[15] }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    {% if previous_predictions %}
+    <h3>Previous Predictions</h3>
+    <div class="predictions-container">
+        {% for prediction in previous_predictions|reverse %}
+        <div class="prediction-item">
+            <p><strong>General Health:</strong> {{ prediction[2] }}</p>
+            <p><strong>Blood Pressure:</strong> {{ prediction[3] }}</p>
+            <p><strong>BMI:</strong> {{ prediction[4] }}</p>
+            <p><strong>Walking Difficulty:</strong> {{ prediction[5] }}</p>
+            <p><strong>High Cholesterol:</strong> {{ prediction[6] }}</p>
+            <p><strong>Age:</strong> {{ prediction[7] }}</p>
+            <p><strong>Heart Disease:</strong> {{ prediction[8] }}</p>
+            <p><strong>Physical Health:</strong> {{ prediction[9] }}</p>
+            <p><strong>Stroke:</strong> {{ prediction[10] }}</p>
+            <p><strong>Mental Health:</strong> {{ prediction[11] }}</p>
+            <p><strong>Cholesterol Check:</strong> {{ prediction[12] }}</p>
+            <p><strong>Smoker:</strong> {{ prediction[13] }}</p>
+            <p><strong>Prediction:</strong> {{ prediction[14] }}</p>
+            <p><strong>Date:</strong> {{ prediction[15] }}</p>
+        </div>
+        {% endfor %}
+    </div>
+        {% endif %}
+        
+    </main>
+
+    <footer>
+        <p>&copy; 2025 SugarSense. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function confirmLogout() {
+            const userConfirmed = window.confirm("Are you sure you want to log out?");
+            if (userConfirmed) {
+                window.location.href = "{{ url_for('login') }}";
+            }
+        }
+        
+        
+    </script>
+</body>
+</html>

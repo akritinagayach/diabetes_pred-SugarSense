@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='setting.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo2.png') }}" alt="SugarSense Logo">
+        </div>
+        <nav>
+            <a href="{{ url_for('account') }}" class="account-button">Account</a> <!-- Redirect to the main page -->
+        </nav>
+
+    </header>
+
+    <main>
+        <center><h1>Settings</h1></center>
+
+    <div class="settings-container">
+        <h2>Account Information</h2>
+        <form id="update-account-form" method="post" onsubmit="showSuccessMessage(event)">
+            <div class="form-item">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" value="{{ user[0] }}" readonly>
+            </div>
+
+            <div class="form-item">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="{{ user[1] }}" readonly>
+            </div>
+
+            <button type="button" onclick="enableEdit()" class="edit-button">Edit</button>
+            <button type="submit" id="save-button" class="submit-button" style="display:none;">Save Changes</button>
+
+            <p id="success-message" style="display:none; color:green; margin-top:10px;">Changes saved successfully!</p>
+        </form>
+
+        <h2>Change Password</h2>
+        <form id="update-password-form" method="post" onsubmit="showSuccessMessage(event)">
+            <div class="form-item">
+                <label for="current_password">Current Password:</label>
+                <input type="password" id="current_password" name="current_password" required>
+            </div>
+
+            <div class="form-item">
+                <label for="new_password">New Password:</label>
+                <input type="password" id="new_password" name="new_password" required>
+            </div>
+
+            <div class="form-item">
+                <label for="confirm_password">Confirm New Password:</label>
+                <input type="password" id="confirm_password" name="confirm_password" required>
+            </div>
+
+            <button type="submit" class="submit-button">Update Password</button>
+            <p id="success-message" style="display:none; color:green; margin-top:10px;">Changes saved successfully!</p>
+        </form>
+
+
+
+        <h2>Theme Settings</h2>
+            <form id="update-theme-form" method="post" onsubmit="showSuccessMessage(event)">
+                <div class="form-item">
+                    <label for="theme">Theme Preference:</label>
+                    <select id="theme" name="theme">
+                        <option value="light" {% if user.theme == 'light' %}selected{% endif %}>Light</option>
+                        <option value="dark" {% if user.theme == 'dark' %}selected{% endif %}>Dark</option>
+                    </select>
+                </div>
+
+
+                
+                <button type="submit" class="submit-button">Save Preferences</button>
+                <p id="success-message" style="display:none; color:green; margin-top:10px;">Changes saved successfully!</p>
+            </form>
+
+                <h3>Account Deletion</h3>
+                <button type="button" onclick="confirmAccountDeletion()" class="delete-button">Delete Account</button>
+            </form>
+
+            <h2>Additional Settings</h2>
+            <form id="additional-settings-form" method="post" onsubmit="showSuccessMessage(event)">
+                <div class="form-item">
+                    <label for="language">Language</label>
+                    <input type="text" id="language" name="language" value="English" readonly>
+                </div>
+
+                <div class="form-item">
+                    <label for="timezone">Time Zone</label>
+                    <input type="text" id="timezone" name="timezone" readonly> <!-- Non-editable field -->
+                    <p id="success-message" style="display:none; color:green; margin-top:10px;">Changes saved successfully!</p>
+                </div>
+
+                <div class="form-item">
+                    <h2>Download Your Health Report<h2>
+                    <p>Click the button below to generate and download your health report in PDF format.<p>
+                    <a href="/download_report" class="download-btn">Download Report</a>
+                </div>
+                
+            </form>
+
+            <h2>Feedback & Support</h2>
+            <div class="support-links">
+                <a href="{{ url_for('contact') }}">Contact Support</a>
+                <a href="{{ url_for('feedback') }}">Report an Issue</a>
+            </div>
+        </div>
+    </main>
+
+    <div id="success-message" style="display:none; color:green; text-align:center; margin-top:10px;">
+        Changes saved successfully!
+    </div>
+
+    <footer>
+        <p>&copy; 2025 SugarSense. All rights reserved.</p>
+    </footer>
+
+
+
+    <script>
+
+        function showSuccessMessage(event) {
+            event.preventDefault(); // Prevent form submission for testing
+    
+            // Send form data via fetch (Optional)
+            fetch(event.target.action, {
+                method: 'POST',
+                body: new FormData(event.target)
+            }).then(response => response.text()).then(data => {
+                let successMessage = document.createElement('p');
+                successMessage.textContent = 'Changes saved successfully!';
+                successMessage.style.color = 'green';
+                successMessage.style.marginTop = '10px';
+                successMessage.classList.add('success-message');
+    
+                // Remove existing messages before adding a new one
+                event.target.querySelectorAll('.success-message').forEach(msg => msg.remove());
+    
+                event.target.appendChild(successMessage);
+    
+                // Remove message after 3 seconds
+                setTimeout(() => successMessage.remove(), 3000);
+            });
+        }
+    
+        // Attach event listener to ALL forms dynamically
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('form').forEach(form => {
+                form.addEventListener('submit', showSuccessMessage);
+            });
+        });
+
+        function validatePassword(event) {
+            event.preventDefault();
+            const newPassword = document.getElementById('new_password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+            if (newPassword !== confirmPassword) {
+                alert('Passwords do not match!');
+                return false;
+            }
+            showSuccessMessage(event);
+        }
+
+        document.getElementById("update-password-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+        
+            const formData = new FormData(this);
+        
+            fetch("/change_password", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Password updated successfully!");
+                } else {
+                    alert("Error: " + data.error);
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        });
+
+        function downloadReport() {
+            window.location.href = "/download_report";
+        }
+
+        function confirmAccountDeletion() {
+            if (confirm('Are you sure you want to delete your account? This action is irreversible.')) {
+                fetch('/delete_account', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'same-origin' // Ensures session cookies are sent
+                })
+                .then(response => {
+                    if (response.redirected) {
+                        window.location.href = response.url; // Redirect to the register page
+                    } else {
+                        return response.text();
+                    }
+                })
+                .then(data => {
+                    if (data) alert(data); // Show error message if any
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        }
+
+        function savePrivacySettings(event) {
+            event.preventDefault(); // Prevent actual submission
+    
+            fetch(event.target.action, {
+                method: 'POST',
+                body: new FormData(event.target)
+            }).then(response => response.text()).then(data => {
+                document.getElementById('privacy-success-message').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('privacy-success-message').style.display = 'none';
+                }, 3000);
+            });
+        }
+        function confirmAccountDeletion() {
+            if (confirm('Are you sure you want to delete your account? This action is irreversible.')) {
+                fetch('/delete_account', {
+                    method: 'POST'
+                }).then(response => response.json()).then(data => {
+                    if (data.success) {
+                        alert('Your account has been deleted.');
+                        window.location.href = '/logout'; // Redirect user after deletion
+                    } else {
+                        alert('Account deletion failed. Please try again.');
+                    }
+                });
+            }
+        }
+        // Auto-detect user timezone and set it in the readonly input field
+    document.addEventListener("DOMContentLoaded", function() {
+        const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        document.getElementById("timezone").value = userTimezone;
+    });
+
+    function saveSettings(event) {
+        event.preventDefault(); // Prevent form submission refresh
+        fetch('/save-settings', { 
+            method: 'POST',
+            body: new FormData(document.getElementById('additional-settings-form'))
+        }).then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  document.getElementById("success-message").style.display = "block";
+              }
+          });
+    }
+
+        function enableEdit() {
+            document.getElementById('username').removeAttribute('readonly');
+            document.getElementById('email').removeAttribute('readonly');
+            document.querySelector('.edit-button').style.display = 'none';
+            document.querySelector('.submit-button').style.display = 'block';
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const themeSelect = document.getElementById("theme");
+            const savedTheme = localStorage.getItem("theme") || "light";
+
+            // Apply saved theme
+            document.body.setAttribute("data-theme", savedTheme);
+            themeSelect.value = savedTheme;
+
+            themeSelect.addEventListener("change", function () {
+                document.body.setAttribute("data-theme", this.value);
+                localStorage.setItem("theme", this.value);
+            });
+        });
+
+        // Show success message after saving
+    document.getElementById('update-account-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission to check functionality
+
+    // Perform form submission using JavaScript (Optional: AJAX can be used)
+    fetch(this.action, {
+        method: 'POST',
+        body: new FormData(this)
+    }).then(response => response.text()).then(data => {
+        document.getElementById('success-message').style.display = 'block';
+        setTimeout(() => {
+            document.getElementById('success-message').style.display = 'none';
+        }, 3000);
+    });
+});
+
+function saveSettings(event) {
+    event.preventDefault(); // Prevent form submission refresh
+    fetch('/save-settings', { 
+        method: 'POST',
+        body: new FormData(document.getElementById('additional-settings-form'))
+    }).then(response => response.json())
+      .then(data => {
+          if (data.success) {
+              document.getElementById("success-message").style.display = "block";
+          }
+      });
+}
+    </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Exercise Recommendation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='excercise.css') }}">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo2.png') }}" alt="Logo">
+        </div>
+        <nav>
+            <a href="{{ url_for('mainpage2') }}" class="home-button">Home</a> <!-- Redirect to the main page -->
+        </nav>
+    </header> 
+    
+    <div class="container">
+        <center><h1>Exercise Recommendations for Diabetes Management</h1></center>
+        <h2>Why is Excercise important?</h2>
+    <p class="exercise-info">
+        Exercise is crucial in managing diabetes as it helps regulate blood sugar levels, improves insulin sensitivity, and promotes overall cardiovascular health. Regular physical activity allows the body to use glucose more efficiently, preventing high blood sugar levels, which is especially important for people with Type 2 diabetes. Additionally, exercise supports the body’s ability to transport glucose from the bloodstream into muscle cells, where it is utilized for energy, thus helping to lower blood sugar levels naturally.<br>
+
+        Exercise also aids in weight management, reduces stress, and lowers the risk of complications associated with diabetes, such as heart disease, neuropathy, and kidney damage. By maintaining a healthy weight, individuals can reduce insulin resistance, which is a key factor in Type 2 diabetes. Furthermore, physical activity triggers the release of endorphins, known as "feel-good" hormones, which help combat stress, anxiety, and depression that often accompany chronic health conditions like diabetes.<br>
+        
+        Beyond these benefits, exercise improves circulation, enhances lung function, and strengthens muscles, contributing to better overall physical fitness. It also helps in improving sleep patterns, which are often disrupted in people with diabetes. By incorporating exercise into daily routines, individuals with diabetes can enhance their quality of life, better manage the condition, and significantly reduce the risk of long-term complications. A balanced approach combining aerobic exercises, strength training, and flexibility exercises can provide the most comprehensive benefits for managing diabetes.</p>
+    </div>
+    
+    <div class="container">
+        <center><h2>Suggested Yoga Poses</h2></center>
+        <div class="yoga-poses">
+           <!-- Vertical arrangement of images -->
+           <img src="{{ url_for('static', filename='bhujang_asna.jpg') }}" alt="Bhujangasana (Cobra Pose)">
+           <img src="{{ url_for('static', filename='dhanur_asna.jpg') }}" alt="Dhanurasana (Bow Pose)">
+           <img src="{{ url_for('static', filename='matsya_asna.jpg') }}" alt="Matsyasana (Fish Pose)">
+           <img src="{{ url_for('static', filename='shav_asna.jpg') }}" alt="Shavasana (Corpse Pose)">
+           <img src="{{ url_for('static', filename='suryanamaskar.jpg') }}" alt="Surya Namaskar (Sun Salutation)">
+            
+        </div>
+    </div>
+
+
+    <div class="container">
+        <center><h2>Personalized Exercise Plan</h2></center>
+        
+
+        <label>Age: </label>
+        <input type="number" name="age" id="age" required><br><br>
+    
+        <label>Gender: </label>
+        <select id="gender" name="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select><br><br>
+    
+        <label>Height (cm): </label>
+        <input type="number" name="height" id="height" required><br><br>
+    
+        <label>Weight (kg): </label>
+        <input type="number" name="weight" id="weight" required><br><br>
+
+        <label>Prediction Result: </label>
+        <input type="text" name="prediction_result" id="prediction_result" readonly><br><br>
+    
+        <button onclick="getExercisePlan()">Get Exercise Plan</button>
+        
+
+        <div id="exercise-plan-container" style="display:none;">
+            <h3>Your Exercise Plan</h3>
+            <table id="exercise-table">
+                <thead>
+                    <tr>
+                        <th>Workout Type</th>
+                        <th>Frequency</th>
+                        <th>Duration</th>
+                        <th>Exercises</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+
+    <script>
+        async function fetchPredictionResult() {
+            try {
+                const response = await fetch(`/get_prediction_result`);
+                const data = await response.json();
+
+                console.log("API Response:", data);
+                if (data.error) {
+                    alert("Error: " + data.error);
+                } else {
+                    document.getElementById("prediction_result").value = data.prediction_result;
+                }
+            } catch (error) {
+                alert("Error fetching prediction result: " + error.message);
+            }
+        }
+
+        async function getExercisePlan() {
+            const gender = document.getElementById("gender").value;
+            const age = document.getElementById("age").value;
+            const height = document.getElementById("height").value;
+            const weight = document.getElementById("weight").value;
+            const predictionResult = document.getElementById("prediction_result").value;
+        
+            if (!age || !height || !weight || !gender || !predictionResult) {
+                alert("Please fill in all fields and ensure prediction is fetched.");
+                return;
+            }
+        
+            try {
+                const response = await fetch("/get_exercise_plan", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ age, gender, height, weight, prediction_result: predictionResult })
+                });
+        
+                const data = await response.json();
+                console.log("Exercise Plan API Response:", data);
+                if (data.error) {
+                    alert("Error: " + data.error);
+                } else {
+                    displayExercisePlan(data);
+                }
+            } catch (error) {
+                alert("Error fetching exercise plan: " + error.message);
+            }
+        }
+        
+        function displayExercisePlan(exercisePlan) {
+            const tableBody = document.getElementById("exercise-table").querySelector("tbody");
+            tableBody.innerHTML = "";
+        
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${exercisePlan.workout_type}</td>
+                <td>${exercisePlan.frequency}</td>
+                <td>${exercisePlan.duration}</td>
+                <td>${exercisePlan.exercises}</td>
+            `;
+            tableBody.appendChild(row);
+        
+            document.getElementById("exercise-plan-container").style.display = "block";
+        }
+        
+        window.onload = fetchPredictionResult;
+    </script>
+    
+
+</body>
+
+
+</html>

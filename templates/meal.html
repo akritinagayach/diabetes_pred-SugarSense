@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Meal Recommendation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='meal.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo2.png') }}" alt="Logo">
+        </div>
+        <nav>
+            <a href="{{ url_for('mainpage2') }}" class="home-button">Home</a> <!-- Redirect to the main page -->
+        </nav>
+    </header> 
+    <div class="container">
+        <center><h1>Understanding Diabetes and Nutrition</h1></center>
+        <h2>What is Diabetes?</h2>
+        <p>Diabetes is a chronic medical condition that occurs when the body cannot properly regulate blood sugar (glucose) levels.<br>
+            Diabetes mellitus (known commonly as diabetes) is not one disease but a group of metabolic disorders which are characterized by hyperglycemia, meaning high blood sugar.<br>
+            Usually, doctors divide diabetes into:<br>
+
+            <h3>1. Type 1 diabetes (insulin-dependent diabetes mellitus)</h3>
+               <p> This form of diabetes occurs when the body's immune system mistakenly attacks and destroys the insulin-producing cells in the pancreas. As a result, people with Type 1 diabetes have little to no insulin, which is essential for converting glucose from food into energy.</p>
+            <h3>2. Type 2 diabetes (non-insulin-dependent diabetes mellitus)</h3> 
+               <p>This is the more common form of diabetes, where the body either becomes resistant to insulin or does not produce enough insulin. This leads to elevated levels of glucose in the blood, which can cause various health problems over time.</p>
+            
+            <p>In both types, high blood sugar levels can lead to serious complications such as heart disease, kidney damage, nerve damage, and vision problems. Type 2 diabetes is often preventable and can be managed or even reversed through lifestyle changes such as a healthy diet, regular exercise, and weight management.
+
+               People with diabetes need to monitor their blood sugar levels and follow their healthcare provider’s advice to manage the condition effectively and prevent complications.</p>
+            <h3>3. Gestational diabetes (occurs in pregnant women)</h3>
+                <p>Gestational diabetes is a type of diabetes that develops during pregnancy. It is characterized by high blood sugar (glucose) levels that can affect both the mother and the baby. Gestational diabetes usually occurs around the 24th to 28th week of pregnancy and can be managed with proper care. It typically goes away after the baby is born, but it increases the risk of developing type 2 diabetes later in life for the mother.</p>
+            
+       
+
+        <h2>Importance of Diet in Diabetes Management</h2>
+            <p>Diet plays a crucial role in managing diabetes, as it directly affects blood sugar levels and overall health. Proper nutrition helps to maintain stable blood glucose levels, prevent complications, and improve quality of life for individuals living with diabetes.<br>
+               A balanced diet helps regulate blood sugar levels, maintain a healthy weight, and reduce the risk of complications. Here’s why diet is important in diabetes management:</p>
+            <ul>
+                <li>Regulates blood sugar levels: Eating a balanced diet with the right amount of carbohydrates, proteins, and fats can help stabilize blood sugar levels and prevent spikes and crashes.</li>
+                <li>Controls weight: Maintaining a healthy weight is essential for managing diabetes, as excess body fat can lead to insulin resistance and high blood sugar levels.</li>
+                <li>Reduces the risk of complications: A healthy diet can help reduce the risk of complications associated with diabetes, such as heart disease, kidney damage, and nerve damage.</li>
+                <li>Improves overall health: Eating a balanced diet rich in nutrients can improve overall health and well-being, boosting energy levels, immunity, and vitality.</li>
+            </ul>
+
+            <center><h2>Weekly Meal Plan</h2></center>
+        <div class="food-combination">
+            <img src="{{ url_for('static', filename='diet.jpg') }}" alt="Foods to Include and Avoid">
+            <ul>
+            </ul>
+        </div>
+
+        <div class="container">
+            <center><h2>Personalized Meal Plan</h2></center>
+        
+            <label>Age: </label>
+            <input type="number" name="age" id="age" required><br><br>
+        
+            <label>Gender: </label>
+            <select id="gender" name="gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select><br><br>
+        
+            <label>Height (cm): </label>
+            <input type="number" name="height" id="height" required><br><br>
+        
+            <label>Weight (kg): </label>
+            <input type="number" name="weight" id="weight" required><br><br>
+        
+            <label>Diet Preference: </label>
+            <select id="diet_preference" name="diet_preference">
+                <option value="Veg">Vegetarian</option>
+                <option value="Non-Veg">Non-Vegetarian</option>
+                <option value="Vegan">Vegan</option>
+            </select><br><br>
+        
+            <label>Prediction Result: </label>
+            <input type="text" name="prediction_result" id="prediction_result" readonly><br><br>
+        
+            <button onclick="getMealPlan()">Get Meal Plan</button>
+        
+            <div id="meal-plan-container" style="display:none;">
+                <h3>Your Meal Plan</h3>
+                <table id="meal-table">
+                    <thead>
+                        <tr>
+                            <th>Meal</th>
+                            <th>Food Items</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <script>
+            async function fetchPredictionResult() {
+                try {
+                    const response = await fetch(`/get_prediction_result`);
+                    const data = await response.json();
+        
+                    console.log("API Response:", data);
+                    if (data.error) {
+                        alert("Error: " + data.error);
+                    } else {
+                        document.getElementById("prediction_result").value = data.prediction_result;
+                    }
+                } catch (error) {
+                    alert("Error fetching prediction result: " + error.message);
+                }
+            }
+        
+            async function getMealPlan() {
+                const gender = document.getElementById("gender").value;
+                const age = document.getElementById("age").value;
+                const height = document.getElementById("height").value;
+                const weight = document.getElementById("weight").value;
+                const dietPreference = document.getElementById("diet_preference").value;
+                const predictionResult = document.getElementById("prediction_result").value;
+        
+                if (!age || !height || !weight || !gender || !dietPreference || !predictionResult) {
+                    alert("Please fill in all fields and ensure prediction is fetched.");
+                    return;
+                }
+        
+                try {
+                    const response = await fetch("/get_meal_plan", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ age, gender, height, weight, diet_preference: dietPreference })
+                    });
+        
+                    const data = await response.json();
+                    console.log("Meal Plan API Response:", data);
+                    if (data.error) {
+                        alert("Error: " + data.error);
+                    } else {
+                        displayMealPlan(data.meal_plan);
+                    }
+                } catch (error) {
+                    alert("Error fetching meal plan: " + error.message);
+                }
+            }
+        
+            function displayMealPlan(mealPlan) {
+                const tableBody = document.getElementById("meal-table").querySelector("tbody");
+                tableBody.innerHTML = "";
+            
+                const daysMapping = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+            
+                Object.entries(mealPlan).forEach(([dayIndex, meals], i) => {
+                    const dayName = daysMapping[i]; // Convert Day 1 → Monday
+            
+                    // ✅ Add a row for the day header
+                    const dayRow = document.createElement("tr");
+                    dayRow.innerHTML = `<td colspan="2" style="background-color: #f4f4f4; font-weight: bold;">${dayName}</td>`;
+                    tableBody.appendChild(dayRow);
+            
+                    // ✅ Add breakfast, lunch, and dinner rows
+                    const mealNames = ["Breakfast", "Lunch", "Dinner"];
+                    meals.forEach((meal, idx) => {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `<td>${mealNames[idx]}</td><td>${meal}</td>`;
+                        tableBody.appendChild(row);
+                    });
+                });
+            
+                document.getElementById("meal-plan-container").style.display = "block";
+            }
+            
+        
+            window.onload = fetchPredictionResult;
+        </script>
+        
+        
+        
+            
+            
+
+        
+        
+
+
+        
+
+        
+
+        
+            
+        
+        </body>
+        </html>
+        

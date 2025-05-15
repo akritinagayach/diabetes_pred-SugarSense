@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Health Questionnaire</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='predict.css') }}">
+
+    <script>
+
+        window.onload = () => {
+            window.scrollTo(0, 0); // Bring user to the top of the page on refresh
+        };
+
+        function convertHeight() {
+            const heightType = document.getElementById("height-option").value;
+            const heightInput = document.getElementById("height").value;
+            let heightCm = 0;
+
+            if (heightType === "cm") {
+                heightCm = parseFloat(heightInput);
+            } else if (heightType === "feet") {
+                const [feet, inches] = heightInput.split('.').map(num => parseFloat(num) || 0);
+                heightCm = (((feet * 12) + inches) * 2.54).toFixed(2);
+            }
+
+            document.getElementById("height-cm").value = heightCm;
+            calculateBMI(heightCm);
+        }
+
+        function calculateBMI(heightCm) {
+            let weight = parseFloat(document.getElementById("weight").value);
+
+            if (heightCm > 0 && weight > 0) {
+                let bmi = (weight / ((heightCm / 100) ** 2)).toFixed(2);
+                document.getElementById("bmi").value = bmi;
+                document.getElementById("bmi-display").innerText = `Calculated BMI: ${bmi}`;
+            } else {
+                document.getElementById("bmi-display").innerText = "";
+            }
+        }
+
+        function showHeightInput() {
+            let heightOption = document.getElementById("height-option").value;
+            let heightInput = document.getElementById("height");
+            
+            if (heightOption === "cm") {
+                heightInput.placeholder = "Enter your height in centimeters";
+            } else {
+                heightInput.placeholder = "Enter your height in feet and inches (e.g., 5.8 for 5ft 8in)";
+            }
+            heightInput.value = "";
+        }
+
+        async function submitForm(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+
+            try {
+
+            const response = await fetch(form.action, {
+                method: form.method,
+                body: formData
+            });
+
+            const result = await response.json();
+
+            let message = '';
+            if (result.prediction === 'Not Diabetic') {
+                message = '🎉 Congratulations! You are not diabetic.';
+            } else if (result.prediction === 'Prediabetic') {
+                message = '⚠️ You are in the prediabetic range. Please consult your doctor.';
+            } else if (result.prediction === 'Diabetic') {
+                message = '❗ You are diabetic. It is important to seek medical advice.';
+            } else {
+                message = '⚠️ Unexpected result. Please try again.';
+            }
+
+            document.getElementById('prediction-result').innerText = message;
+            document.getElementById('prediction-result').style.display = 'block';
+            document.getElementById('prediction-result').scrollIntoView({ behavior: 'smooth' });
+
+        } catch (error) {
+            console.error('Error:', error);
+            document.getElementById('prediction-result').innerText = 'An error occurred while making the prediction. Please try again later.';
+            document.getElementById('prediction-result').style.display = 'block';
+            document.getElementById('prediction-result').scrollIntoView({ behavior: 'smooth' });
+        }
+        }
+
+// Scroll to prediction result after form submission
+document.addEventListener("DOMContentLoaded", function() {
+    const predictionResult = document.getElementById('prediction-result');
+    if (predictionResult) {
+        predictionResult.scrollIntoView({ behavior: 'smooth' });
+    }
+});
+
+// Clear form fields and prediction on page refresh
+window.onload = function() {
+    if (performance.getEntriesByType("navigation")[0].type === "reload") {
+        window.scrollTo(0, 0); // Scrolls to the top of the page
+        document.querySelectorAll('input[type="text"], input[type="number"]').forEach(input => input.value = '');
+        document.getElementById('bmi-display').innerText = '';
+        const predictionElement = document.getElementById('prediction-result');
+        if (predictionElement) {
+            predictionElement.style.display = 'none';
+        }
+    }
+};
+
+
+    </script>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo2.png') }}" alt="Logo">
+        </div>
+        <nav>
+            <a href="{{ url_for('mainpage2') }}" class="home-button">Home</a> <!-- Redirect to the main page -->
+        </nav>
+    </header> 
+
+    <div class="container">
+        <div class="form-container">
+            <center><h1>User Health Questionnaire</h1></center>
+            <form action="{{ url_for('predict') }}" method="post">
+                
+                <div class="form-row">
+                    <div class="form-item">
+                        <label for="height-option">Height:</label>
+                        <select id="height-option" onchange="showHeightInput()">
+                            <option value="cm">Centimeters (cm)</option>
+                            <option value="feet">Feet and Inches</option>
+                        </select>
+                        <input type="text" id="height" name="height" placeholder="Enter your height in cm" oninput="convertHeight()" required>
+                        <input type="hidden" id="height-cm" name="height-cm">
+                    </div>
+
+                    <div class="form-item">
+                        <label for="weight">What is your weight (in kg)?</label>
+                        <input type="number" id="weight" name="weight" placeholder="Enter your weight in kg" required oninput="convertHeight()">
+                    </div>
+                </div>
+
+                   
+
+                <div class="form-row">
+                    <div class="form-item">
+                        <label for="bmi">BMI (Body Mass Index):</label>
+                        <input type="text" id="bmi" name="bmi" readonly>
+                        <p id="bmi-display" style="font-weight: bold; color: blue;"></p>
+                    </div>
+                    <div class="form-item">
+                        <label for="age">How old are you?</label>
+                        <input type="number" id="age" name="age" placeholder="Enter your age in years" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-item">
+                        <label for="physical_health">
+                            In the past 30 days, how many days did you feel physically unwell?
+                        </label>
+                        <input type="number" id="physical_health" name="physical_health" min="1" max="30" placeholder="e.g., 5" required>
+                    </div>
+                    <div class="form-item">
+                        <label for="mental_health">
+                            In the past 30 days, how many days did you feel mentally unwell? 
+                            <small>(e.g., stress, depression, or emotional problems)</small>
+                        </label>
+                        <input type="number" id="mental_health" name="mental_health" min="1" max="30" placeholder="e.g., 10" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-item">
+                        <label for="general_health">
+                            How would you rate your overall health?
+                            <small>1 = Excellent, 2 = Very Good, 3 = Good, 4 = Fair, 5 = Poor</small>
+                        </label>
+                        <input type="number" id="general_health" name="general_health" min="1" max="5" placeholder="Enter a number from 1-5" required>
+                    </div>
+                    <div class="form-item">
+                        <label for="blood_pressure">
+                            Have you ever been diagnosed with high blood pressure?
+                            <small>0 = No BP, 1 = Yes</small>
+                        </label>
+                        <input type="number" id="blood_pressure" name="blood_pressure" min="0" max="1" placeholder="0 or 1" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-item">
+                        <label for="smoking">
+                            Have you ever been a regular smoker (around 100 cigarettes or more in total)?
+                            <small>0 = No, 1 = Yes</small>
+                        </label>
+                        <input type="number" id="smoking" name="smoking" min="0" max="1" placeholder="0 or 1" required>
+                    </div>
+                    <div class="form-item">
+                        <label for="diffwalk">
+                            Do you have any difficulty walking or climbing stairs?
+                            <small>0 = No, 1 = Yes</small>
+                        </label>
+                        <input type="number" id="diffwalk" name="diffwalk" min="0" max="1" placeholder="0 or 1" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-item">
+                        <label for="highchol">
+                            Have you ever been diagnosed with high cholesterol?
+                            <small>0 = No, 1 = Yes</small>
+                        </label>
+                        <input type="number" id="highchol" name="highchol" min="0" max="1" placeholder="0 or 1" required>
+                    </div>
+                    <div class="form-item">
+                        <label for="heartdisease">
+                            Do you have heart disease?
+                            <small>0 = No, 1 = Yes</small>
+                        </label>
+                        <input type="number" id="heartdisease" name="heartdisease" min="0" max="1" placeholder="0 or 1" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-item">
+                        <label for="stroke">
+                            Have you ever had a stroke?
+                            <small>0 = No, 1 = Yes</small>
+                        </label>
+                        <input type="number" id="stroke" name="stroke" min="0" max="1" placeholder="0 or 1" required>
+                    </div>
+                    <div class="form-item">
+                        <label for="cholcheck">
+                            Have you had your cholesterol checked in the last 5 years?
+                            <small>0 = No, 1 = Yes</small>
+                        </label>
+                        <input type="number" id="cholcheck" name="cholcheck" min="0" max="1" placeholder="0 or 1" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-button">Submit</button>
+            </form>
+            
+
+            {% if prediction_text %}
+                <div id="prediction-result"  class="prediction-result">
+                    <h2>Prediction Result: {{ prediction_text }}</h2>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
+
+
+

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='mainpage2.css') }}">
+    <title>Homepage</title>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo2.png') }}" alt="Logo">
+        </div>
+        <!-- Dropdown Menu Button -->
+        <div class="dropdown-menu-container">
+            <button class="hamburger-menu" onclick="toggleDropdown()">☰</button>
+            <div id="dropdownMenu" class="dropdown-content">
+                <a href="{{ url_for('account') }}">Account</a>
+                <a href="{{ url_for('how_it_works') }}">How It Works</a>
+                <a href="{{ url_for('faq') }}">Frequently Asked Questions</a>
+                <a href="{{ url_for('contact') }}">Contact Us</a>
+                <a href="{{ url_for('feedback') }}">Feedback</a>
+                <a href="{{ url_for('about') }}">About Us</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <center><h1>Services We Provide</h1></center>  
+        <div class="buttons">
+            <div class="button-item">
+                <img src="{{ url_for('static', filename='prediction.jpg') }}" alt="Prediction" class="icon-circle">
+                <button onclick="window.location.href='/predict'">Get Prediction</button>
+            </div>
+            <div class="button-item">
+                <img src="{{ url_for('static', filename='food2.jpg') }}" alt="Meal" class="icon-circle">
+                <button onclick="window.location.href='/meal'">Meal Recommendation</button>
+            </div>
+            <div class="button-item">
+                <img src="{{ url_for('static', filename='excercise.jpg') }}" alt="Exercise" class="icon-circle">
+                <button onclick="window.location.href='/excercise'">Exercise Recommendation</button>
+            </div>
+        </div>
+
+
+        
+        
+    </main>
+
+     
+    
+    
+        
+    <script>    
+        
+        // Toggle the dropdown menu visibility
+        function toggleDropdown() {
+            const dropdown = document.getElementById("dropdownMenu");
+            dropdown.classList.toggle("show");
+        }
+
+        
+            function resetChatSession() {
+                const chatFrame = document.getElementById('chatbase-chatbox');
+                if (chatFrame) {
+                    chatFrame.remove(); // Remove existing chat session
+                }
+        
+                // Clear local and session storage
+                localStorage.clear();
+                sessionStorage.clear();
+        
+                // Clear cookies if any session data is stored there
+                document.cookie.split(";").forEach(function(c) { 
+                    document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+                });
+        
+                // Re-embed the chat script
+                const script = document.createElement("script");
+                script.src = "https://www.chatbase.co/embed.min.js";
+                script.id = "UyqzCx7AItLmnAuuSkhpV";
+                document.body.appendChild(script); // Start new session
+            }
+        
+            function onUserLogin() {
+                resetChatSession();
+            }
+        
+            function onUserLogout() {
+                resetChatSession(); // Clear chat history on logout
+            }
+        
+            document.getElementById('loginButton')?.addEventListener('click', onUserLogin);
+            document.getElementById('logoutButton')?.addEventListener('click', onUserLogout);
+        </script>
+    </script>
+
+    <!-- Google Maps API Script 
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyiy7EdWoMQhdWqHFdEq-KLPzaOGzP8Rg&libraries=places">
+    </script> -->
+
+    <!-- Footer Section -->
+    <footer>
+        <!-- Chatbase Integration -->
+        <!-- Chatbase Integration -->
+<script>
+    (function() {
+        if (!window.chatbase || window.chatbase("getState") !== "initialized") {
+            window.chatbase = (...arguments) => {
+                if (!window.chatbase.q) {
+                    window.chatbase.q = [];
+                }
+                window.chatbase.q.push(arguments);
+            };
+            window.chatbase = new Proxy(window.chatbase, {
+                get(target, prop) {
+                    if (prop === "q") {
+                        return target.q;
+                    }
+                    return (...args) => target(prop, ...args);
+                }
+            });
+        }
+
+        const onLoad = function() {
+            const script = document.createElement("script");
+            script.src = "https://www.chatbase.co/embed.min.js";
+            script.id = "UyqzCx7AItLmnAuuSkhpV";
+            script.setAttribute("domain", "www.chatbase.co");
+            document.body.appendChild(script);
+        };
+
+        if (document.readyState === "complete") {
+            onLoad();
+        } else {
+            window.addEventListener("load", onLoad);
+        }
+    })();
+</script>
+
+<elevenlabs-convai agent-id="ijkGgr4NK9KKrPxbCLuz" 
+style="position: fixed; bottom: 10px; left: 0px; z-index: 1000; margin: 10px; transform: translateX(-80%);"></elevenlabs-convai>
+<script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+
+
+    </footer>
+</body>
+</html>

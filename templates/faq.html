@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes FAQ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='faq.css') }}">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const faqItems = document.querySelectorAll(".faq-item");
+
+            faqItems.forEach(item => {
+                item.addEventListener("click", () => {
+                    item.classList.toggle("active");
+                    const content = item.querySelector(".faq-content");
+                    if (item.classList.contains("active")) {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    } else {
+                        content.style.maxHeight = "0";
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo2.png') }}" alt="Logo">
+        </div>
+        <nav>
+            <a href="{{ url_for('mainpage2') }}" class="home-button">Home</a> <!-- Redirect to the main page -->
+        </nav>
+    </header> 
+
+    <main>
+        <h1>Frequently Asked Questions About Diabetes</h1>
+        <div class="faq">
+            <div class="faq-item">
+                <h2>What is diabetes?</h2>
+                <div class="faq-content">
+                    <p>Diabetes is a chronic health condition where the body has difficulty regulating blood sugar levels.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h2>What are the common symptoms of diabetes?</h2>
+                <div class="faq-content">
+                    <p>Common symptoms include frequent urination, excessive thirst, fatigue, and blurry vision.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h2>What is prediabetes?</h2>
+                <div class="faq-content">
+                    <p>Prediabetes is a condition where blood sugar levels are higher than normal but not yet high enough to be classified as diabetes.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h2>Can diabetes be prevented?</h2>
+                <div class="faq-content">
+                    <p>Yes, adopting a healthy lifestyle, including a balanced diet and regular exercise, can reduce the risk of diabetes.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h2>What are the types of diabetes?</h2>
+                <div class="faq-content">
+                    <p>There are primarily two types of diabetes: Type 1 and Type 2, with Type 2 being more common.</p>
+                </div>
+            </div>
+            <!-- Additional FAQ items -->
+            <div class="faq-item">
+                <h2>What is insulin and how does it work?</h2>
+                <div class="faq-content">
+                    <p>Insulin is a hormone that helps regulate blood sugar levels. It allows cells in the body to absorb glucose for energy.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h2>How is diabetes diagnosed?</h2>
+                <div class="faq-content">
+                    <p>Diabetes is diagnosed through blood tests that measure blood sugar levels, such as fasting blood glucose and HbA1c tests.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h2>Can people with diabetes eat sugar?</h2>
+                <div class="faq-content">
+                    <p>People with diabetes can eat sugar in moderation, but they need to carefully monitor their blood sugar levels and manage their diet.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h2>What are the complications of uncontrolled diabetes?</h2>
+                <div class="faq-content">
+                    <p>Uncontrolled diabetes can lead to complications such as heart disease, kidney damage, nerve damage, and vision problems.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h2>How can I manage my diabetes effectively?</h2>
+                <div class="faq-content">
+                    <p>Effective management includes maintaining a healthy diet, regular exercise, monitoring blood sugar levels, and taking prescribed medications.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Diabetes Information Center</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup Page</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
+</head>
+<body>
+
+  <div class="logo">
+    <img src="{{ url_for('static', filename='logo3.png') }}" alt="Logo">
+  </div>
+ 
+<!-- Flash Message Section -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+  <div class="flash-messages">
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+{% endwith %}
+
+  <div class="login">
+    <div class="hader">
+      <span>Join us today!</span>
+      <p>Sign up now to become a member.</p>
+    </div>
+    <form method="POST" action="{{ url_for('register') }}">
+      <input type="text" id="name" name="name" placeholder="Enter Name" required />
+      <input type="email" id="email" name="email" placeholder="Enter Email" required />
+
+      <div class="password-container">
+        <input type="password" id="password" name="password" placeholder="Choose A Password" required minlength="8" />
+      </div>
+
+      <div class="password-container">
+        <input type="password" id="confirm-password" name="confirm_password" placeholder="Re-Enter Password" required />
+      </div>
+
+      <button type="submit">Signup</button>
+      <span>Already a member? <a href="{{ url_for('login') }}">Login Here</a></span>
+    </form>
+  </div>
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction - How It Works</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='how_it_works.css') }}">
+</head>
+<body>
+    <!-- Logo Section -->
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo2.png') }}" alt="Logo">
+        </div>
+        <nav>
+            <a href="{{ url_for('mainpage2') }}" class="home-button">Home</a> <!-- Redirect to the main page -->
+        </nav>
+    </header>  
+    <!-- Main Content Section -->
+    <main>
+        <section class="intro">
+            <h1>How SugarSense Works</h1>
+            <center><img src="{{ url_for('static', filename='prediction.jpg') }}" alt="Diabetes Concept" class="intro-img"></center>
+            <p>Our website predicts your diabetes risk based on key health metrics and provides useful recommendations to help you manage and reduce your risk. 
+               By analyzing factors such as age, gender, BMI, blood pressure, and other health indicators, our platform offers a personalized assessment of whether you are at risk of being diabetic, prediabetic, or if you are safe. 
+               Along with the prediction, we also offer tailored suggestions on diet, exercise, and lifestyle changes that can help in managing or preventing diabetes. Whether you're seeking to prevent diabetes or manage an existing condition, our website provides valuable insights and resources to help you take control of your health.</p>
+        </section>
+
+        <!-- Health Metrics Explanation -->
+        <section class="metrics">
+            <h2>Health Metrics Used for Prediction</h2>
+            <p>We use various health metrics to assess your diabetes risk, including:</p>
+            <ul>
+                <li><img src="{{ url_for('static', filename='age.png') }}" alt="Age Icon" class="metric-icon"><strong>Age:</strong> Older age can increase the risk of diabetes.</li>
+                <li><img src="{{ url_for('static', filename='gender.png') }}" alt="Gender Icon" class="metric-icon"><strong>Gender:</strong> Gender plays a role in the risk of diabetes.</li>
+                <li><img src="{{ url_for('static', filename='bmi.png') }}" alt="BMI Icon" class="metric-icon"><strong>BMI:</strong> High body mass index (BMI) is a strong indicator of risk.</li>
+                <li><img src="{{ url_for('static', filename='bp.jpg') }}" alt="Blood Pressure Icon" class="metric-icon"><strong>Blood Pressure:</strong> Abnormal blood pressure levels suggest diabetes risk.</li>
+                <li><img src="{{ url_for('static', filename='heart.jpg') }}" alt="Heart Icon" class="metric-icon"><strong>Hypertension and Heart Disease:</strong> A history of these conditions can elevate your risk.</li>
+            </ul>
+        </section>
+
+        <!-- Prediction Algorithm Explanation -->
+        <section class="algorithm">
+            <h2>How the Prediction Algorithm Works</h2>
+                <p>Our prediction algorithm uses the inputted data to assess your risk of being diabetic, prediabetic, or safe. The model considers:</p>
+        
+                <h3>Data Collection</h3>
+                    <p>The algorithm uses several health metrics to assess the risk of diabetes:</p>
+                    <ul>
+                        <li>Age: Age plays a role in diabetes risk. Older adults are generally at a higher risk.</li>
+                        <li>Gender: Gender can affect the likelihood of developing diabetes due to hormonal and physiological differences.</li>
+                        <li>BMI (Body Mass Index): A high BMI, indicating overweight or obesity, is one of the strongest predictors of diabetes.</li>
+                        <li>Blood Pressure: Higher levels of blood pressure are a clear indicator of diabetes risk.</li>
+                    </ul>
+                
+                <h3>Data Preprocessing</h3>
+                    <p>The model is trained using large datasets that include historical health data and the corresponding diabetes status (diabetic, prediabetic, or safe). Common algorithms used for training the model include:</p>
+                    <ul>
+                        <li>Normalization: Ensuring that data points (such as blood pressure or BMI) are within the same range to avoid any feature dominating the model.</li>
+                        <li>Missing Value Handling: If a user’s input is missing, the algorithm can fill in those values using predefined rules or omit that specific input for analysis.</li>
+                        <li>Categorical Data Encoding: Converting categorical variables (like gender) into numerical values that the model can understand.</li>
+                    </ul> 
+                    
+                <h3>Model Training</h3> 
+                    <p>The algorithm uses several health metrics to assess the risk of diabetes:</p>
+                    <ul>
+                        <li>Logistic Regression: For binary classification (diabetic or not diabetic)</li>
+                        <li>Random Forests: For determining the importance of different health metrics in predicting diabetes.</li>
+                        <li>Support Vector Machines (SVM): For finding the hyperplane that best divides the data points into different categories.</li>
+                        <li>XGBoost: XGBoost effectively handles complex relationships in health metrics, providing accurate diabetes risk predictions by learning from large datasets.</li>
+                        <li>LightGBM: LightGBM offers faster training and better efficiency on large healthcare datasets, making it ideal for real-time diabetes risk assessments.</li>
+                    </ul>
+
+                <h3>Risk Prediction</h3>
+                    <p>After the model is trained, it can classify the user's health data into one of the following categories:</p>
+                    <ul>
+                        <li>Diabetic: The model predicts that the individual has diabetes.</li>
+                        <li>Prediabetic: The model predicts that the individual has an increased risk and may develop diabetes if no intervention is made.</li>
+                        <li>Safe: The model predicts that the individual does not have diabetes and is at a low risk.</li>
+                    </ul> 
+               
+            <h2>Result</h2>
+            <p>Our model uses machine learning algorithms trained on large datasets to provide accurate predictions.</p>
+            <div class="algorithm-visual">
+                <img src="{{ url_for('static', filename='result.png') }}" alt="Prediction Algorithm Diagram">
+            </div>
+        </section>
+
+        <!-- Additional Resources -->
+        <section class="resources">
+            <h2>Learn More</h2>
+            <p>Here are some additional resources to help you better understand diabetes:</p>
+            <ul>
+                <li><a href="https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes" target="_blank" rel="noopener noreferrer">What is Diabetes?</a></li>
+                <li><a href="https://www.healthline.com/nutrition/14-ways-to-lower-blood-sugar" target="_blank" rel="noopener noreferrer">How to Manage Blood Glucose Levels</a></li>
+                <li><a href="https://www.mayoclinic.org/diseases-conditions/diabetes/in-depth/diabetes-diet/art-20044295" target="_blank" rel="noopener noreferrer">Healthy Eating for Diabetics</a></li>
+                <li><a href="https://www.indiabetes.in/articles/diabetes-and-travel-17-top-tips-to-travel-safe-and-stress-free" target="_blank" rel="noopener noreferrer">Travel Tips for Diabetics</a></li>
+                <li><a href="https://www.diabetes.org/diabetes/complications" target="_blank" rel="noopener noreferrer">Diabetes-Related Complications</a></li>
+                <li><a href="https://www.medicalnewstoday.com/articles/317220" target="_blank" rel="noopener noreferrer">Exercise and Blood Sugar Control</a></li>
+                <li><a href="https://www.webmd.com/diabetes/guide/diabetes-glucose-monitoring" target="_blank" rel="noopener noreferrer">How to Monitor Blood Sugar at Home</a></li>
+                <li><a href="https://www.niddk.nih.gov/health-information/diabetes/overview/insulin-medicines-treatments" target="_blank" rel="noopener noreferrer">Treatment Options for Diabetes</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Diabetes Prediction Website. All rights reserved.</p>
+    </footer>
+</body>
+</html>

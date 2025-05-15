@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Started Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <img src="{{ url_for('static', filename='logo2.png') }}" alt="Logo" class="logo">
+            <button class="get-started-button" onclick="window.location.assign('{{ url_for('register') }}')">Get Started</button>
+
+        </div>
+        <div class="image-section">
+            <img src="{{ url_for('static', filename='side_image.jpg') }}" alt="Side Image" class="side-image">
+        </div>
+    </div>
+</body>
+</html>
