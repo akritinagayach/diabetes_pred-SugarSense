@@ -159,7 +159,7 @@ pip install -r requirements.txt
 
 1. **Clone the repository**
 
-      git clone <https://github.com/your-username/SugarSense.git>
+      git clone <https://github.com/akritinagayach/diabetes_pred-SugarSense.git>
 
 1. **Navigate to the project directory**
 
